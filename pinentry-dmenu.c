@@ -183,7 +183,7 @@ insert(const char *str, ssize_t n) {
 static void
 drawwin(void) {
 	unsigned int curpos;
-	int x = 0, pb, pbw = 0, i;
+	int x = 0, pb, pbw = 0, i, fh = drw->fonts->h;
 	size_t asterlen = strlen(asterisk);
 	size_t pdesclen;
 	int leftinput;
@@ -250,12 +250,12 @@ drawwin(void) {
 
 		censort[i+1] = '\n';
 		leftinput = mw - x - pbw;
-		drw_text(drw, x, 0, leftinput, bh, lrpad / 2, censort, 0);
+		drw_text(drw, x, 5, leftinput, bh, lrpad / 2, censort, 0);
 		drw_font_getexts(drw->fonts, censort, cursor * asterlen, &curpos, NULL);
 
 		if ((curpos += lrpad / 2 - 1) < leftinput) {
 			drw_setscheme(drw, scheme[SchemeNormal]);
-			drw_rect(drw, x + curpos, 2, 2, bh - 4, 1, 0);
+			drw_rect(drw, x + curpos, (bh - fh) / 2, 2, fh - 2, 1, 0);
 		}
 
 		free(censort);
@@ -293,6 +293,7 @@ setup(void) {
 
 	/* Calculate menu geometry */
 	bh = drw->fonts->h + 2;
+	bh = MAX(bh,lineheight);	/* make a menu line AT LEAST 'lineheight' tall */
 	mh = bh;
 #ifdef XINERAMA
 	info = XineramaQueryScreens(dpy, &n);
