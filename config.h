@@ -12,9 +12,9 @@ static const char *fonts[] = {
 };
 static const char *prompt = NULL;
 static const char *colors[SchemeLast][4] = {
-	[SchemePrompt] = { "#191919", "#458588" },
+	[SchemePrompt] = { "#191919", "#00ACC1" },
 	[SchemeNormal] = { "#ebdbb2", "#282c34" },
-	[SchemeSelect] = { "#191919", "#458588" },
+	[SchemeSelect] = { "#191919", "#00ACC1" },
 	[SchemeDesc]   = { "#d79921", "#282c34" }
 };
 static unsigned int lineheight = 40;
